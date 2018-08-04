@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/Mvc15">
+<form method="post" action="/mvcJdbc01">
     <label>
         <input type = "text" name ="title" placeholder="title">
         <input type = "text" name ="author" placeholder="author">

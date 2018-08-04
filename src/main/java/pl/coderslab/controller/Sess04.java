@@ -1,6 +1,7 @@
 package pl.coderslab.controller;
 
 import pl.coderslab.service.Product;
+import pl.coderslab.service.SessionService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,21 +35,29 @@ public class Sess04 extends HttpServlet {
         if(products == null) {
             products = new ArrayList<>();
         }
-
         try {
             String name = request.getParameter("name");
             Integer amount = Integer.parseInt(request.getParameter("amount"));
             Double price = Double.parseDouble(request.getParameter("price"));
 
-            Product product = new Product(name, amount, price);
-            products.add(product);
+            boolean action = false;
+            for(Product prod : products) {
+                if(prod.getName().equals(name) && prod.getName() != null){
+                    prod.setAmount(prod.getAmount() + amount);
+                    action = true;
+                    break;
+                }
+            }
+            if(action == false) {
+                Product product = new Product(name, amount, price);
+                products.add(product);
+            }
+
             sess.setAttribute("products_list", products);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-
         doGet(request, response);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,5 +74,8 @@ public class Sess04 extends HttpServlet {
             wr.println("</p>");
         }
 
+        wr.println("<h5>");
+        wr.println("sum: " + SessionService.basketTotal(products));
+        wr.println("</h5>");
     }
 }

@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class MathService {
     public static String equation(double a, double b, double c) {
@@ -49,5 +50,10 @@ public class MathService {
 
     public static double tempartureFahrToCelc(double startTemp) {
         return 5.0/9*(startTemp - 32);
+    }
+
+    public static int generateRandomNumber(int start, int end) {
+        Random random = new Random();
+        return random.nextInt(end - start) + start;
     }
 }

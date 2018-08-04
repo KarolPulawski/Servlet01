@@ -10,8 +10,14 @@ public class SessionService {
         return new Product(name, amount, price);
     }
 
-//    public static List<Book> setBooks(int bookNumber) {
-//
-//    }
+    public static double basketTotal(List<Product> list) {
+        double total = 0.0;
+        for(Product prod : list) {
+            total += prod.getPrice() * prod.getAmount();
+        }
+        return total;
+    }
+
+
 }
 
